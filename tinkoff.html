@@ -1,0 +1,149 @@
+ <!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+        <title> Tinkoff Data Science Challenge
+
+        </title>
+
+        <link rel="stylesheet" href="http://lab.hakim.se/reveal-js/css/reveal.css">
+        <link rel="stylesheet" href="http://lab.hakim.se/reveal-js/css/theme/black.css">
+
+        <!-- Theme used for syntax highlighting of code -->
+        <link rel="stylesheet" href="http://lab.hakim.se/reveal-js/lib/css/zenburn.css">
+
+        <!-- Printing and PDF exports -->
+        <script>
+            var link = document.createElement( 'link' );
+            link.rel = 'stylesheet';
+            link.type = 'text/css';
+            link.href = window.location.search.match( /print-pdf/gi ) ? 'http://lab.hakim.se/reveal-js/css/print/pdf.css' : 'http://lab.hakim.se/reveal-js/css/print/paper.css';
+            document.getElementsByTagName( 'head' )[0].appendChild( link );
+        </script>
+    </head>
+    <body>
+        <!-- Slides are here -->
+        <div class="reveal">
+            <div class="slides">
+                <section>
+                    <h4><font color='red'>Tinkoff Data Science Challenge</h4></font>
+                    <p>Соболева Дарья</p>
+                    <p>Викулин Всеволод</p>
+                    <p>Попов Николай</p>
+                </section>
+                <section>
+                    <h4>Задача 1. Выбор кредита Tinkoff.ru</h4>
+                </section>
+                <section>
+                    <h4>Постановка задачи</h4>
+                        Tinkoff.ru работает с сетью магазинов электроники, в которой присутствуют и другие банки. 
+                          Заявка на кредит от покупателя поступает сразу в несколько банков.
+                        Необходимо предсказать, выберет ли покупатель кредит от Tinkoff.ru
+                </section>
+                <section>
+                    <h4>Данные</h4>
+                    <p>Обучение: ~ 170K</p>
+                    <p>Тест: ~ 91K</p>
+                    <p>6 вещественных признаков, 7 категориальных.</p> 
+                </section> 
+                <section>  
+                    <p><font color='red'>living_region</font></p>
+                    <p>'ОБЛ', 'ОБЛАСТЬ', 'РЕСП', 'РЕСПУБЛИКА'...</p>
+                </section>
+                <section>
+                    <h4>Категориальные признаки</h4>
+                    <p>Статистика по топовым фичам для каждой категории.</p>
+                    <p>Кодирование при помощи счётчиков.</p>
+                </section>
+                <section>
+                    <h4>Ансамбли наше всё!</h4>
+                    <p><font color='red'>AUC-LB: 0.7737
+                    <p>AUC-Valid: 0.7731</p>
+                    <p>AUC-CV: 0.7716</p></font>
+                </section>
+                <section>
+                    <h4>Задача 2. Восстановление позиции мерчанта</h4>
+                </section>
+                <section>
+                    <h4>Постановка задачи</h4>
+                    Мерчант — это место, принимающее платежи с использованием банковской пластиковой карты.
+                    Банк знает геопозицию большинства мерчантов.
+                    Необходимо по нескольким чекинам восстановить геопозицию неизвестных мерчантов.
+                </section>
+                <section>                  
+                        <h4>@XgboostMaster</h4>
+                        <img src=http://www.praga-praha.ru/wp-content/uploads/2013/12/Sberbank-CZ.jpg height="100" width="300">
+                        <p class="fragment fade-up"><img src=https://pp.userapi.com/c623425/v623425285/4cceb/4LzBY_gUZrE.jpg></p>
+               </section>
+
+                <section>                  
+                        <h4>Основная идея 1</h4>
+                        <p class="fragment fade-up"><img src=http://image.prntscr.com/image/96689b75fe344e0bbd6425f0885f61b3.png></p>
+               </section>
+                <section>                  
+                        <h4>Основная идея 2</h4>
+                        <p class="fragment fade-up"><img src=http://4.bp.blogspot.com/-yjcua4BXYs0/VjiauWrRE5I/AAAAAAAABgs/T150kpDHTXc/s320/overlapping-squares.jpg></p>
+               </section>
+ 
+                <section>                  
+                        <h4>Что делать дальше?</h4>
+                        <p class="fragment fade-up"><img src=https://raw.githubusercontent.com/dmlc/dmlc.github.io/master/img/logo-m/xgboost.png></p>
+                        <p class="fragment fade-up">Какие фичи?</p>
+                        <p class="fragment fade-up">Удаленность от центра масс чекинов</p>
+                        <p class="fragment fade-up">Средняя удаленность от всех точек</p>
+                        <p class="fragment fade-up">...</p>
+               </section>
+
+                <section>
+                   <h4>К чему это?</h4>
+                   <img src=http://www.analyticalway.com/images/SMV/svmFeatureSpace2.gif>
+                   <p class="fragment fade-up">Правильный ответ внутри одного из этих кластеров</p>
+                   <p class="fragment fade-up">Новые фичи в разрезе кластера</p>
+                </section>
+
+
+                <section>
+                   <h4>Какая еще особенность у магазинов?</h4>
+                   <p class="fragment fade-up"><img src=http://www.praga-praha.ru/wp-content/uploads/2014/10/Atrium-Flora-1.jpg height="400" width="800"></p>
+                   <p class="fragment fade-up">Фичи из чекинов других мерчантов</p>
+                </section>
+
+                <section>
+                    <h4>Явно чего-то не хватает, да?</h4>
+                    <img src=http://image.prntscr.com/image/b7958e68f8bc46c495b75d2804eab84e.png height="400" width="600"></p>
+
+                    <p class="fragment fade-up">Фичей из гугл карт ... </p>
+
+                </section>
+
+            </div>
+        </div>
+
+        <!-- Imports -->
+        <script src="http://lab.hakim.se/reveal-js/lib/js/head.min.js"></script>
+        <script src="http://lab.hakim.se/reveal-js/js/reveal.js"></script>
+
+        <script>
+            // More info https://github.com/hakimel/reveal.js#configuration
+            Reveal.initialize({
+                history: true,
+                    math: {
+                        mathjax: 'https://cdn.mathjax.org/mathjax/latest/MathJax.js',
+                        config: 'TeX-AMS_HTML-full'  // See http://docs.mathjax.org/en/latest/config-files.html
+                    },
+                // More info https://github.com/hakimel/reveal.js#dependencies
+                dependencies: [
+                    //{ src: 'http://lab.hakim.se/reveal-js/socket.io/socket.io.js', async: true },
+                    { src: 'http://lab.hakim.se/reveal-js/plugin/notes-server/client.js', async: true },
+                    { src: 'http://lab.hakim.se/reveal-js/plugin/math/math.js', async: true },
+                    { src: 'http://lab.hakim.se/reveal-js/plugin/markdown/marked.js' },
+                    { src: 'http://lab.hakim.se/reveal-js/plugin/markdown/markdown.js' },
+                    { src: 'http://lab.hakim.se/reveal-js/plugin/notes/notes.js', async: true },
+                    { src: 'http://lab.hakim.se/reveal-js/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
+                ]
+            });
+        </script>
+    </body>
+</html>
