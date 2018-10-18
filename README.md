@@ -1,1 +1,1 @@
-# slides-and-papers
+# Competitions/univerity slides and papers.
